@@ -110,6 +110,7 @@ function gameLoop(){
     if(running && !gameOver){
         update();
     }else if(gameOver){
+        alert("Game Over. Try again!");
         clearInterval(int);
     }
 }
@@ -127,9 +128,11 @@ function update(){
     else if(direction == 2)
         snakeX++;
     set(snakeX, snakeY, "snake");
+    //if you run into yourself, the game ends
     for(var i = tailX.length-1; i>= 0; i--){
         if(snakeX == tailX[i] && snakeY == tailY[i]){
             gameOver = true;
+            alert("Game Over. Try Again!");
             break;
         }
     }
@@ -142,6 +145,15 @@ function update(){
     }
     document.getElementById("score").innerHTML  = "Score: " + score;
 }
+
+//if the game ends, user can click try again that resets the game for another trial
+function reloadPage(){
+    if(gameOver == true){
+
+        window.parent.location = window.parent.location.href;
+    }
+}
+
 
 function updateTail(){
         for(var i = length; i > 0; i--){
